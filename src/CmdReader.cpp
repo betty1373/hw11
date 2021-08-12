@@ -115,9 +115,7 @@ std::map<std::string,CmdBlk>::iterator CmdReader::AddContext(const std::string& 
     
     if (it==m_contexts.end()) {
         auto [insIt, inserted] = m_contexts.try_emplace(clientId);
-        if (inserted) {
-            it = insIt;
-        }
+        if (inserted) it = insIt;
     }
     return it;
 }
