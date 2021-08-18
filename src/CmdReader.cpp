@@ -1,106 +1,127 @@
 #include "../inc/CmdReader.h"
 #include <tuple>
-std::shared_ptr<CmdReader> CmdReader::Create(size_t num_cmds,std::istream& istream) {
-    auto ptr = std::shared_ptr<CmdReader>{ new CmdReader{num_cmds,istream}};
+#include <boost/algorithm/string.hpp>
+
+std::shared_ptr<CmdReader> CmdReader::Create() {
+    auto ptr = std::shared_ptr<CmdReader>{ new CmdReader{}};   
     return ptr;
 }
  CmdReader::~CmdReader() {
     //m_cv.notify_all();
 }
-void CmdReader::Subscribe(const std::shared_ptr<Observer>& obs) {
-     m_observers.emplace_back(obs);
-}
+// void CmdReader::Subscribe(const std::shared_ptr<Observer>& obs) {
+//      m_observers.emplace_back(obs);
+// }
      
-void CmdReader::Notify(std::vector<std::string>& cmds) {
-    if (cmds.empty()) return;   
+// void CmdReader::Notify(std::vector<std::string>& cmds) {
+//     if (cmds.empty()) return;   
         
-    for (auto it=m_observers.begin();it!=m_observers.end();++it) {
-        auto ptr = it->lock();
-        if (ptr) {
-            std::stringstream ss = FormBatch(cmds);
-            ptr->Update(ss);
+//     for (auto it=m_observers.begin();it!=m_observers.end();++it) {
+//         auto ptr = it->lock();
+//         if (ptr) {
+//             std::stringstream ss = FormBatch(cmds);
+//             ptr->Update(ss);
+//         }
+//         else
+//             m_observers.erase(it);
+//     }
+//  //   cmds.resize(0);
+// }
+    
+void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
+{ 
+    std::vector<std::string> parts;
+    boost::trim(cmd);
+    boost::split(parts, cmd, boost::is_any_of(" "));
+    std::string result = "OK\n";
+
+    auto command_match = [&](cmd_t cmd, size_t count)
+    {
+        boost::to_upper(parts[0]);
+        return (parts[0] == cmd) && (parts.size() == count);
+    };
+
+    if (parts.size())
+    {
+        if(command_match("INSERT", 4))
+        {
+            //std::cout << "INSERT " << tokens[1] << " " << tokens[2] << " "<< tokens[3] << std::endl;
+            auto err = m_database->Insert(parts[1], std::stoi(parts[2]), parts[3]);
+            result = m_database->Db_Err(err, parts[2]);
+        }
+        else if (command_match("TRUNCATE", 2))
+        {
+            //std::cout << "TRUNCATE " << tokens[1] << std::endl;
+            auto err = m_database->Truncate(parts[1]);
+            result = m_database->Db_Err(err, parts[1]);
+        }
+        else if (command_match("INTERSECTION", 1))
+        {
+            //std::cout << "INTERSECTION" << std::endl;
+            auto res = m_database->Intersection();
+            result = res + result;
+        }
+        else if (command_match("SYMMETRIC_DIFFERENCE", 1))
+        {
+            //std::cout << "SYMMETRIC_DIFFERENCE" << std::endl;
+            auto res = m_database->Symmetric_difference();
+            result = res + result;
         }
         else
-            m_observers.erase(it);
+        {
+            //std::cout << "unknown command" << std::endl;
+            result = "ERR unknown command\n";
+        }
     }
- //   cmds.resize(0);
-}
-    
-void CmdReader::NewCmd(const std::string& clientId, const std::string& cmd)
-{ 
-    if (cmd.empty()) return;
+    else
+    {
+        //std::cout << "parse_input error" << std::endl;
+        result = "ERR bad command format\n";
+    }
+   
     {
         std::unique_lock<std::mutex> locker(m_mutex);
         auto context = GetContext(clientId);
-        
-        if (cmd=="{") {
-            context = AddContext(clientId);
-            context->second.m_cnt_braces++;
-        }
-        else if (cmd=="}") {
-            if (context->second.m_cnt_braces>0) {
-                context->second.m_cnt_braces--;
-            }
-            else {
-                context->second.m_cmds.resize(0);
-            }
-        }
-        else {
-            context->second.m_cmds.emplace_back(cmd);
-        }
+            
+        context->second = result; 
     }
-    CmdLog();
+   // CmdLog();
 }
-void CmdReader::CmdLog(bool to_log) {
-  std::unique_lock<std::mutex> locker(m_mutex); 
-  //if (to_log) 
-  //{
-    //  std::cout<<"last"<<std::endl;
- // }
-  auto it = m_contexts.begin();
-  while (it != m_contexts.end() ) {
-    auto& context = it->second; 
-    if (!context.m_cnt_braces && (to_log || context.m_cmds.size() >= m_num_cmds) ) {
-      if (context.m_cmds.size() > 0) {
-        Notify(context.m_cmds);    
-        context.m_cmds.resize(0);       
-      }
-      it = m_contexts.erase(it);
-    }
-    else {
-      ++it;
-    }
-  }
-}
+
 void CmdReader::AddClient(const std::string& client) {
     m_clients.emplace(client);
 }
 void CmdReader::DeleteClient(const std::string& client) {
     m_clients.erase(client);
-    if (m_clients.size()==0) {
-        CmdLog(true);
-    }
+}
+cmd_t CmdReader::GetResponse(const std::string& client) {
+    auto it = GetContext(client);
+    auto& context = it->second; 
+    auto cmds = context;
+    context.resize(0);   
+    return cmds;
 }   
-CmdReader::CmdReader(size_t num_cmds,std::istream& istream) 
-    : m_num_cmds{num_cmds},
-      m_istream(istream)
+CmdReader::CmdReader() 
 {
-    //m_cmds.reserve(m_num_cmds);
+    m_database = std::make_unique<Database>();
+    m_database->AddTable("A");
+    m_database->AddTable("B");
+     //m_cmds.reserve(m_num_cmds);
 }
 
-std::stringstream CmdReader::FormBatch(std::vector<std::string>& cmds) {
+// std::stringstream CmdReader::FormBatch(std::vector<std::string>& cmds) {
     
-    std::stringstream ss;
+//     std::stringstream ss;
     
-    for (auto it_cmd = cmds.cbegin();it_cmd!=cmds.cend();it_cmd++) {
-        if (it_cmd !=cmds.cbegin())
-            ss<< ", "<<*it_cmd;
-        else
-            ss<<"bulk: "<<*it_cmd;
-    }
-    return ss;     
-}
-std::map<std::string,CmdBlk>::iterator CmdReader::GetContext(const std::string& clientId) {
+//     for (auto it_cmd = cmds.cbegin();it_cmd!=cmds.cend();it_cmd++) {
+//         if (it_cmd !=cmds.cbegin())
+//             ss<< ", "<<*it_cmd;
+//         else
+//             ss<<"bulk: "<<*it_cmd;
+//     }
+//     return ss;     
+// }
+std::map<std::string,cmd_t>::iterator CmdReader::GetContext(const std::string& clientId) {
     
     auto it = m_contexts.find(clientId);
     
@@ -109,7 +130,7 @@ std::map<std::string,CmdBlk>::iterator CmdReader::GetContext(const std::string& 
     }
     return it;
 }
-std::map<std::string,CmdBlk>::iterator CmdReader::AddContext(const std::string& clientId) {
+std::map<std::string,cmd_t>::iterator CmdReader::AddContext(const std::string& clientId) {
 
     auto it = m_contexts.find(clientId);
     
