@@ -9,24 +9,6 @@ std::shared_ptr<CmdReader> CmdReader::Create() {
  CmdReader::~CmdReader() {
     //m_cv.notify_all();
 }
-// void CmdReader::Subscribe(const std::shared_ptr<Observer>& obs) {
-//      m_observers.emplace_back(obs);
-// }
-     
-// void CmdReader::Notify(std::vector<std::string>& cmds) {
-//     if (cmds.empty()) return;   
-        
-//     for (auto it=m_observers.begin();it!=m_observers.end();++it) {
-//         auto ptr = it->lock();
-//         if (ptr) {
-//             std::stringstream ss = FormBatch(cmds);
-//             ptr->Update(ss);
-//         }
-//         else
-//             m_observers.erase(it);
-//     }
-//  //   cmds.resize(0);
-// }
     
 void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
 { 
@@ -45,37 +27,31 @@ void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
     {
         if(command_match("INSERT", 4))
         {
-            //std::cout << "INSERT " << tokens[1] << " " << tokens[2] << " "<< tokens[3] << std::endl;
+           
             auto err = m_database->Insert(parts[1], std::stoi(parts[2]), parts[3]);
             result = m_database->Db_Err(err, parts[2]);
         }
         else if (command_match("TRUNCATE", 2))
         {
-            //std::cout << "TRUNCATE " << tokens[1] << std::endl;
+           
             auto err = m_database->Truncate(parts[1]);
             result = m_database->Db_Err(err, parts[1]);
         }
-        else if (command_match("INTERSECTION", 1))
-        {
-            //std::cout << "INTERSECTION" << std::endl;
+        else if (command_match("INTERSECTION", 1))  {
             auto res = m_database->Intersection();
             result = res + result;
         }
         else if (command_match("SYMMETRIC_DIFFERENCE", 1))
         {
-            //std::cout << "SYMMETRIC_DIFFERENCE" << std::endl;
             auto res = m_database->Symmetric_difference();
             result = res + result;
         }
         else
-        {
-            //std::cout << "unknown command" << std::endl;
+        {          
             result = "ERR unknown command\n";
         }
     }
-    else
-    {
-        //std::cout << "parse_input error" << std::endl;
+    else {
         result = "ERR bad command format\n";
     }
    
@@ -85,7 +61,6 @@ void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
             
         context->second = result; 
     }
-   // CmdLog();
 }
 
 void CmdReader::AddClient(const std::string& client) {
