@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bulk_server: inc/CmdReader.h File Reference</title>
+<title>join_server: inc/CmdReader.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">bulk_server
+   <div id="projectname">join_server
    </div>
    <div id="projectbrief">otus hw9</div>
   </td>
@@ -67,13 +67,14 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">CmdReader.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Structure for save cmds.  
+<p>Class for processing commands.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
@@ -82,27 +83,22 @@ $(function() {
 <code>#include &lt;set&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;condition_variable&gt;</code><br />
-<code>#include &quot;<a class="el" href="_observer_8h_source.html">Observer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_database_8h_source.html">Database.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for CmdReader.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_cmd_reader_8h__incl.png" border="0" usemap="#ainc_2_cmd_reader_8h" alt=""/></div>
 <map name="ainc_2_cmd_reader_8h" id="ainc_2_cmd_reader_8h">
-<area shape="rect" title="Structure for save cmds." alt="" coords="319,5,441,32"/>
+<area shape="rect" title="Class for processing commands." alt="" coords="226,5,347,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,77,107"/>
-<area shape="rect" title=" " alt="" coords="101,80,160,107"/>
-<area shape="rect" title=" " alt="" coords="185,80,239,107"/>
-<area shape="rect" title=" " alt="" coords="263,80,302,107"/>
-<area shape="rect" title=" " alt="" coords="327,80,367,107"/>
-<area shape="rect" title=" " alt="" coords="391,80,438,107"/>
-<area shape="rect" title=" " alt="" coords="462,80,519,107"/>
-<area shape="rect" title=" " alt="" coords="544,80,605,107"/>
-<area shape="rect" title=" " alt="" coords="630,80,757,107"/>
-<area shape="rect" href="_observer_8h.html" title="Abstract Interfaces for ObserverPattern." alt="" coords="781,80,867,107"/>
-<area shape="rect" title=" " alt="" coords="743,155,812,181"/>
-<area shape="rect" title=" " alt="" coords="837,155,905,181"/>
+<area shape="rect" title=" " alt="" coords="51,155,109,181"/>
+<area shape="rect" title=" " alt="" coords="134,155,189,181"/>
+<area shape="rect" title=" " alt="" coords="417,80,455,107"/>
+<area shape="rect" title=" " alt="" coords="480,80,520,107"/>
+<area shape="rect" title=" " alt="" coords="305,155,351,181"/>
+<area shape="rect" title=" " alt="" coords="375,155,433,181"/>
+<area shape="rect" href="_database_8h.html" title="Class for database." alt="" coords="203,80,290,107"/>
+<area shape="rect" title=" " alt="" coords="213,155,281,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -110,13 +106,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="_cmd_reader_8h__dep__incl.png" border="0" usemap="#ainc_2_cmd_reader_8hdep" alt=""/></div>
 <map name="ainc_2_cmd_reader_8hdep" id="ainc_2_cmd_reader_8hdep">
-<area shape="rect" title="Structure for save cmds." alt="" coords="170,5,291,32"/>
-<area shape="rect" href="_logger_8h.html" title="Class outs data from stringstream to console." alt="" coords="115,80,208,107"/>
-<area shape="rect" href="_cmd_reader_8cpp.html" title=" " alt="" coords="232,80,368,107"/>
-<area shape="rect" href="_server_8h.html" title="Class for clients&#39;s session." alt="" coords="55,155,145,181"/>
-<area shape="rect" href="_logger_8cpp.html" title=" " alt="" coords="170,155,278,181"/>
-<area shape="rect" href="main_8cpp.html" title="Main function. Test for processing commands." alt="" coords="5,229,80,256"/>
-<area shape="rect" href="_server_8cpp.html" title=" " alt="" coords="104,229,211,256"/>
+<area shape="rect" title="Class for processing commands." alt="" coords="107,5,229,32"/>
+<area shape="rect" href="_server_8h.html" title="Class for clients&#39;s session." alt="" coords="55,80,145,107"/>
+<area shape="rect" href="_cmd_reader_8cpp.html" title=" " alt="" coords="169,80,305,107"/>
+<area shape="rect" href="main_8cpp.html" title="Main function. Test for processing commands." alt="" coords="5,155,80,181"/>
+<area shape="rect" href="_server_8cpp.html" title=" " alt="" coords="104,155,211,181"/>
 </map>
 </div>
 </div>
@@ -124,16 +118,33 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_cmd_blk.html">CmdBlk</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cmd_reader.html">CmdReader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a44e999a366e530c18b2896e7f5b10cd5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_cmd_reader_8h.html#a44e999a366e530c18b2896e7f5b10cd5">cmd_t</a> = std::string</td></tr>
+<tr class="separator:a44e999a366e530c18b2896e7f5b10cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Structure for save cmds. </p>
-<p>Class for processing commands and notifying subscribers.</p>
+<div class="textblock"><p>Class for processing commands. </p>
 <dl class="section author"><dt>Author</dt><dd>btv<a href="#" onclick="location.href='mai'+'lto:'+'exa'+'mp'+'le@'+'ex'+'amp'+'le'+'.co'+'m'; return false;">examp<span style="display: none;">.nosp@m.</span>le@e<span style="display: none;">.nosp@m.</span>xampl<span style="display: none;">.nosp@m.</span>e.co<span style="display: none;">.nosp@m.</span>m</a> </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a44e999a366e530c18b2896e7f5b10cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e999a366e530c18b2896e7f5b10cd5">&#9670;&nbsp;</a></span>cmd_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="_cmd_reader_8h.html#a44e999a366e530c18b2896e7f5b10cd5">cmd_t</a> =  std::string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

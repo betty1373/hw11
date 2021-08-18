@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bulk_server: Member List</title>
+<title>join_server: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">bulk_server
+   <div id="projectname">join_server
    </div>
    <div id="projectbrief">otus hw9</div>
   </td>
@@ -70,13 +70,11 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="class_cmd_reader.html">CmdReader</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_cmd_reader.html#a9062ef5ee36cc5ecc28932cf8ded0a98">AddClient</a>(const std::string &amp;client)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#a4058635c7db9022733e6b201d92270aa">Create</a>(size_t num_cmds, std::istream &amp;istream=std::cin)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#a03cc08aacfdf1aac10d7ed2fa002d6b1">Create</a>()</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_cmd_reader.html#aa416fa5fe69e409bd0a4f2fb45d3af38">DeleteClient</a>(const std::string &amp;client)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#a02dc6b875c065f0f6bba8db336fcdc87">NewCmd</a>(const std::string &amp;clientId, const std::string &amp;cmd)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_cmd_reader.html#ad3f1a60a45f1e332cddc9ed948152828">Notify</a>(std::vector&lt; std::string &gt; &amp;cmds) override</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#ae277a8d4bb46945d1e57bc8f77e3a664">Subscribe</a>(const std::shared_ptr&lt; Observer &gt; &amp;obs) override</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_cmd_reader.html#a446cc750cc238cda7241143295c4fd64">~CmdReader</a>()</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_observable.html#a058acb5a674eba2b96648c66a27440d8">~Observable</a>()=default</td><td class="entry"><a class="el" href="class_observable.html">Observable</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#a8ef1003debd9ba70b3f1606b31255856">GetResponse</a>(const std::string &amp;client)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_cmd_reader.html#a185c47a40c2d8628e83e0d87355d7b93">NewCmd</a>(const std::string &amp;clientId, cmd_t &amp;cmd)</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_cmd_reader.html#a446cc750cc238cda7241143295c4fd64">~CmdReader</a>()</td><td class="entry"><a class="el" href="class_cmd_reader.html">CmdReader</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

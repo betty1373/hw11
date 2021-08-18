@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['newcmd_105',['NewCmd',['../class_cmd_reader.html#a02dc6b875c065f0f6bba8db336fcdc87',1,'CmdReader']]],
-  ['notify_106',['Notify',['../class_cmd_reader.html#ad3f1a60a45f1e332cddc9ed948152828',1,'CmdReader::Notify()'],['../class_observable.html#adbb20164eab7affe5ed187385648d056',1,'Observable::Notify()']]]
+  ['insert_102',['Insert',['../class_database.html#a45b39ee8a94f63fc7c6ece53c8dd155c',1,'Database']]],
+  ['intersection_103',['Intersection',['../class_database.html#a16fdbd778b6e8d6d91556d3ec59643e7',1,'Database']]]
 ];

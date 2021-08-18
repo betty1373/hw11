@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bulk_server: CMakeLists.txt File Reference</title>
+<title>join_server: CMakeLists.txt File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">bulk_server
+   <div id="projectname">join_server
    </div>
    <div id="projectbrief">otus hw9</div>
   </td>
@@ -73,16 +73,16 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:afc86fa819c55f45cb5f2c9d0e2aae45e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#afc86fa819c55f45cb5f2c9d0e2aae45e">cmake_minimum_required</a> (VERSION 3.10.2) if(NOT DEFINED ENV</td></tr>
 <tr class="separator:afc86fa819c55f45cb5f2c9d0e2aae45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c5ee1476f66ec5fb5d9628b16df6161"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#a8c5ee1476f66ec5fb5d9628b16df6161">set</a> (ENV{GITHUB_RUN_NUMBER} 1) endif() project(bulk_server VERSION 0.0. $ENV</td></tr>
-<tr class="separator:a8c5ee1476f66ec5fb5d9628b16df6161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2c3feb75c77f7cf2938dd020110123"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#a3f2c3feb75c77f7cf2938dd020110123">set</a> (ENV{GITHUB_RUN_NUMBER} 1) endif() project(join_server VERSION 0.0. $ENV</td></tr>
+<tr class="separator:a3f2c3feb75c77f7cf2938dd020110123"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8059bc328e736cd0785c0e3854a766bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#a8059bc328e736cd0785c0e3854a766bd">find_package</a> (Threads REQUIRED) find_package(Boost COMPONENTS system REQUIED) configure_file(version.h.in $</td></tr>
 <tr class="separator:a8059bc328e736cd0785c0e3854a766bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b7ee644c3d8ff143b734027aa7645ff"><td class="memItemLeft" align="right" valign="top">version h&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#a9b7ee644c3d8ff143b734027aa7645ff">add_library</a> (bulk SHARED ${PROJECT_SOURCE_DIR}/src/CmdReader.cpp ${PROJECT_SOURCE_DIR}/src/Logger.cpp ${PROJECT_SOURCE_DIR}/src/Server.cpp) add_executable(bulk_server $</td></tr>
-<tr class="separator:a9b7ee644c3d8ff143b734027aa7645ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22228e3c22dfd832b7bcbd4956fa0ea8"><td class="memItemLeft" align="right" valign="top">version h&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_make_lists_8txt.html#a22228e3c22dfd832b7bcbd4956fa0ea8">add_library</a> (join SHARED ${PROJECT_SOURCE_DIR}/src/CmdReader.cpp ${PROJECT_SOURCE_DIR}/src/Database.cpp ${PROJECT_SOURCE_DIR}/src/Server.cpp) add_executable(join_server $</td></tr>
+<tr class="separator:a22228e3c22dfd832b7bcbd4956fa0ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a9b7ee644c3d8ff143b734027aa7645ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b7ee644c3d8ff143b734027aa7645ff">&#9670;&nbsp;</a></span>add_library()</h2>
+<a id="a22228e3c22dfd832b7bcbd4956fa0ea8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22228e3c22dfd832b7bcbd4956fa0ea8">&#9670;&nbsp;</a></span>add_library()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -90,7 +90,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">version h add_library </td>
           <td>(</td>
-          <td class="paramtype">bulk SHARED ${PROJECT_SOURCE_DIR}/src/CmdReader.cpp ${PROJECT_SOURCE_DIR}/src/Logger.cpp ${PROJECT_SOURCE_DIR}/src/Server.&#160;</td>
+          <td class="paramtype">join SHARED ${PROJECT_SOURCE_DIR}/src/CmdReader.cpp ${PROJECT_SOURCE_DIR}/src/Database.cpp ${PROJECT_SOURCE_DIR}/src/Server.&#160;</td>
           <td class="paramname"><em>cpp</em></td><td>)</td>
           <td></td>
         </tr>
@@ -135,8 +135,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8c5ee1476f66ec5fb5d9628b16df6161"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c5ee1476f66ec5fb5d9628b16df6161">&#9670;&nbsp;</a></span>set()</h2>
+<a id="a3f2c3feb75c77f7cf2938dd020110123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2c3feb75c77f7cf2938dd020110123">&#9670;&nbsp;</a></span>set()</h2>
 
 <div class="memitem">
 <div class="memproto">

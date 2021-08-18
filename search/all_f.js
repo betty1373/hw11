@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['update_59',['Update',['../class_console_logger.html#ab75a39ba8d7d9c5b90f3292247b75e8c',1,'ConsoleLogger::Update()'],['../class_file_logger.html#a682946c821d8a412b3f77db99fa2afde',1,'FileLogger::Update()'],['../class_observer.html#a7b2adc9ad992dd9abe17433b3ab7e89d',1,'Observer::Update()']]]
+  ['table_5fis_5fempty_60',['TABLE_IS_EMPTY',['../class_database.html#af5631b5d522ee79b2348217d279ae3c6aa8a4c3262a767322222f36150e55d5c0',1,'Database']]],
+  ['table_5ft_61',['table_t',['../_database_8h.html#a2a0d7167dad70e37927a7ab52b0af446',1,'Database.h']]],
+  ['targetdirectories_2etxt_62',['TargetDirectories.txt',['../_target_directories_8txt.html',1,'']]],
+  ['truncate_63',['Truncate',['../class_database.html#a8db354bc8e15a1ab4fbf41a4d62f841c',1,'Database']]]
 ];
