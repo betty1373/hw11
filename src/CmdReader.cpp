@@ -6,9 +6,7 @@ std::shared_ptr<CmdReader> CmdReader::Create() {
     auto ptr = std::shared_ptr<CmdReader>{ new CmdReader{}};   
     return ptr;
 }
- CmdReader::~CmdReader() {
-    //m_cv.notify_all();
-}
+ CmdReader::~CmdReader() {}
     
 void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
 { 
@@ -26,14 +24,12 @@ void CmdReader::NewCmd(const std::string& clientId, cmd_t& cmd)
     if (parts.size())
     {
         if(command_match("INSERT", 4))
-        {
-           
+        {           
             auto err = m_database->Insert(parts[1], std::stoi(parts[2]), parts[3]);
             result = m_database->Db_Err(err, parts[2]);
         }
         else if (command_match("TRUNCATE", 2))
-        {
-           
+        {           
             auto err = m_database->Truncate(parts[1]);
             result = m_database->Db_Err(err, parts[1]);
         }
@@ -81,21 +77,8 @@ CmdReader::CmdReader()
     m_database = std::make_unique<Database>();
     m_database->AddTable("A");
     m_database->AddTable("B");
-     //m_cmds.reserve(m_num_cmds);
 }
 
-// std::stringstream CmdReader::FormBatch(std::vector<std::string>& cmds) {
-    
-//     std::stringstream ss;
-    
-//     for (auto it_cmd = cmds.cbegin();it_cmd!=cmds.cend();it_cmd++) {
-//         if (it_cmd !=cmds.cbegin())
-//             ss<< ", "<<*it_cmd;
-//         else
-//             ss<<"bulk: "<<*it_cmd;
-//     }
-//     return ss;     
-// }
 std::map<std::string,cmd_t>::iterator CmdReader::GetContext(const std::string& clientId) {
     
     auto it = m_contexts.find(clientId);
